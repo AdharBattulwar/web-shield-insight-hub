@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SecurityCheckItem, SecurityCheckStatus } from "./SecurityCheckItem";
 import { Flag, ShieldCheck } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface ComplianceCheck {
   id: string;
@@ -15,6 +16,7 @@ interface ComplianceSectionProps {
   description: string;
   checks: ComplianceCheck[];
   loading?: boolean;
+  className?: string; // Added className prop
 }
 
 export function ComplianceSection({
@@ -22,6 +24,7 @@ export function ComplianceSection({
   description,
   checks,
   loading = false,
+  className, // Added className prop
 }: ComplianceSectionProps) {
   const statusSummary = checks.reduce(
     (acc, check) => {
@@ -44,7 +47,7 @@ export function ComplianceSection({
   const criticalStatus = getCriticalStatus();
 
   return (
-    <Card className="security-card">
+    <Card className={cn("security-card", className)}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle>{title}</CardTitle>
